@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Orhen.site</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Blobs -->
+    <div class="blob blob-2" style="background: var(--neon-pink); opacity: 0.2; top: 0;"></div>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container nav-container">
+            <!-- Logo removed -->
+            <div class="mobile-menu-btn">☰</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="container reveal" style="padding-top: 150px; padding-bottom: 100px;">
+        <h1 class="section-title text-gradient">Get in Touch</h1>
+        
+        <div class="grid-2">
+            <!-- Contact Info -->
+            <div>
+                <h3 style="font-size: 2rem; margin-bottom: 20px; color: var(--text-main);">Let's Start a Conversation</h3>
+                <p style="color: var(--text-muted); margin-bottom: 40px;">
+                    Have questions about our APIs? Need a custom Enterprise plan? Reach out to our team, and we'll reply at the speed of light.
+                </p>
+
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: var(--neon-cyan); margin-bottom: 5px;">Email Us</h4>
+                    <p style="color: var(--text-muted);">hello@Orhen.site.com</p>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <h4 style="color: var(--neon-purple); margin-bottom: 5px;">Our HQ</h4>
+                    <p style="color: var(--text-muted);">1 Silicon Avenue, Suite 404<br>San Francisco, CA 94107</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="glass-card">
+                <div id="contact-error" class="form-alert" style="display: none; padding: 10px; margin-bottom: 20px; border-radius: 5px; font-size: 0.9rem; background: rgba(255, 0, 0, 0.1); color: #ff4444; border: 1px solid #ff4444;"></div>
+                <div id="contact-success" class="form-alert" style="display: none; padding: 10px; margin-bottom: 20px; border-radius: 5px; font-size: 0.9rem; background: rgba(0, 255, 0, 0.1); color: #00ff00; border: 1px solid #00ff00;">Message sent successfully!</div>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="john@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Interested Service</label>
+                        <select id="service" class="form-control">
+                            <option value="starter">Starter Plan</option>
+                            <option value="pro" selected>Professional (6 Months Free Offer)</option>
+                            <option value="enterprise">Enterprise Custom</option>
+                            <option value="other">Other Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" class="form-control" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="text-gradient">Orhen.site</h3>
+                    <p>Building the future of artificial intelligence with bold design and unbreakable performance.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Orhen.site. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Firebase Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBFXsRCjJVNwIGGdWvXcz3mU2fUFHDwiIU",
+            authDomain: "orihen-205c4.firebaseapp.com",
+            projectId: "orihen-205c4",
+            storageBucket: "orihen-205c4.firebasestorage.app",
+            messagingSenderId: "717886720655",
+            appId: "1:717886720655:web:b4e68488cc5c29e841befa",
+            measurementId: "G-6L2DWW6RCD"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const contactForm = document.getElementById('contact-form');
+        const errorBox = document.getElementById('contact-error');
+        const successBox = document.getElementById('contact-success');
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorBox.style.display = 'none';
+            successBox.style.display = 'none';
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                await addDoc(collection(db, "contacts"), {
+                    name,
+                    email,
+                    service,
+                    message,
+                    createdAt: new Date().toISOString()
+                });
+                successBox.style.display = 'block';
+                contactForm.reset();
+            } catch (error) {
+                console.error("Form Submit Error:", error);
+                errorBox.innerText = "Error sending message. Please try again.";
+                errorBox.style.display = 'block';
+            } finally {
+                submitBtn.innerText = 'Send Message';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
